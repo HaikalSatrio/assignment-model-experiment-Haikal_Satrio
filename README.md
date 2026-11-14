@@ -4,6 +4,7 @@
 
 **Nama Peserta:** Haikal Satrio
 **Tanggal eksperimen:** 14 November 2026
+**Repository:** https://github.com/HaikalSatrio/assignment-model-experiment-Haikal_Satrio
 
 ---
 
@@ -530,4 +531,4 @@ Hasil LLM dapat berbeda sedikit antar run karena sifat model generatif, meskipun
 - [x] Artefak dokumentasi di folder `documentation/`.
 - [x] Nama peserta sudah diisi.
 - [x] Repository GitHub sudah memakai format `assignment-model-experiment-Haikal_Satrio`.
-- [ ] Pastikan repository bersifat public atau mentor sudah diberi akses.
+- [x] Repository bersifat public dan dapat diakses mentor.
