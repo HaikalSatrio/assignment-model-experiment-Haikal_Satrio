@@ -1,0 +1,3 @@
+Pendekatan,Accuracy,Precision,Recall,F1-Score
+Model Klasik (TF-IDF + LogisticRegression),1.0,1.0,1.0,1.0
+LLM Gemini (zero-shot),1.0,1.0,1.0,1.0

@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+*.egg-info/
+venv/
+.venv/
+
+# Secrets: JANGAN pernah commit file ini
+.env
+
+# Output eksperimen yang dihasilkan ulang (boleh di-commit kalau ingin dijadikan bukti)
+# data/llm_predictions.csv
+# data/predictions_classic.csv
+# data/test_set.csv
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
