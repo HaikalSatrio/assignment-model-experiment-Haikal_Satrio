@@ -2,9 +2,8 @@
 
 **Individual Assignment: Sentiment Analysis Ulasan Pelanggan E-commerce**
 
-**Nama Peserta:** Haikal Satrio
-**Tanggal eksperimen:** 14 November 2026
-**Repository:** https://github.com/HaikalSatrio/assignment-model-experiment-Haikal_Satrio
+**Nama Peserta:** Haikal Satrio Dewandaru
+
 
 ---
 
@@ -101,7 +100,7 @@ Hasilnya 40 kalimat unik yang kemudian dibagi menjadi:
 ## 4. Struktur Project
 
 ```text
-assignment-model-experiment-Haikal_Satrio/
+assignment-model-experiment-nama-peserta/
 ├── data/
 │   └── customer_reviews_sentiment.csv
 ├── documentation/
@@ -128,10 +127,10 @@ assignment-model-experiment-Haikal_Satrio/
 
 Pipeline:
 
-1. Teks diubah menjadi fitur numerik memakai TF-IDF.
-2. Model Logistic Regression dilatih pada 32 kalimat training.
+1. Teks diubah menjadi fitur numerik memakai **TF-IDF**.
+2. Model **Logistic Regression** dilatih pada 32 kalimat training.
 3. Prediksi dilakukan pada 8 kalimat test.
-4. Validasi tambahan memakai 5-fold Stratified Cross-Validation pada seluruh 40 kalimat unik.
+4. Validasi tambahan memakai **5-fold Stratified Cross-Validation** pada seluruh 40 kalimat unik.
 
 TF-IDF bekerja dengan memberi bobot pada setiap kata:
 
@@ -174,8 +173,6 @@ Selama pengerjaan, nama model perlu disesuaikan dengan ketersediaan API:
 
 | Model | Status | Keterangan |
 |---|---|---|
-| `gemini-2.5-flash` | Tidak dipakai | 404, sudah tidak tersedia untuk pengguna baru |
-| `gemini-3.5-flash` | Tidak dipakai | 429, kuota key habis saat eksperimen |
 | `gemini-3.1-flash-lite` | Dipakai | Berhasil memproses 40 dari 40 kalimat tanpa error |
 
 Nama model dapat diubah di Section 5.2 notebook pada variabel:
@@ -288,7 +285,7 @@ Pada 40 kalimat:
 - Model klasik: accuracy 0,70 dan F1 macro 0,70.
 - Gemini 3.1 Flash Lite: accuracy 1,00 dan F1 macro 1,00.
 
-Gemini 3.1 Flash Lite unggul pada eksperimen ini. Namun kesimpulan ini harus dibaca dalam konteks dataset yang kecil dan relatif mudah. LLM mendapat 1,00 pada 40 kalimat, sementara model klasik hanya dilatih dengan 32 kalimat dan kosakata 131 kata.
+**Gemini 3.1 Flash Lite unggul pada eksperimen ini.** Namun kesimpulan ini harus dibaca dalam konteks dataset yang kecil dan relatif mudah. LLM mendapat 1,00 pada 40 kalimat, sementara model klasik hanya dilatih dengan 32 kalimat dan kosakata 131 kata.
 
 ### 7.2 Trade-off effort implementasi
 
@@ -347,14 +344,14 @@ Pada 40 ulasan, perbedaan latency tidak terasa. Pada 1 juta ulasan, model klasik
 
 ## 8. Rekomendasi Technical Approach
 
-Untuk fase awal, rekomendasinya adalah Gemini 3.1 Flash Lite dengan prompt zero-shot. Setelah data berlabel terkumpul cukup banyak, pendekatan dapat dimigrasikan ke model klasik, dengan LLM berperan sebagai pelabel otomatis atau weak supervision.
+**Rekomendasi:** untuk fase awal, gunakan **Gemini 3.1 Flash Lite dengan prompt zero-shot**. Setelah data berlabel terkumpul cukup banyak, migrasikan ke model klasik dan gunakan LLM sebagai pelabel otomatis atau weak supervision.
 
 ### 8.1 Alasan berbasis hasil eksperimen
 
-1. Dataset yang tersedia belum layak untuk melatih model klasik secara optimal. Hanya ada 40 kalimat unik, 32 di antaranya untuk training. Model klasik memperoleh accuracy 0,70 dengan 12 kesalahan, sedangkan LLM memperoleh 1,00 tanpa kesalahan pada 40 kalimat yang sama.
-2. Model klasik lemah pada negasi. Padahal keluhan pelanggan sering berbentuk negasi seperti "tidak berfungsi", "tidak sesuai", dan "belum sampai". LLM menangani negasi tanpa proses training.
-3. Effort implementasi LLM jauh lebih rendah. Tidak ada training, preprocessing, atau tuning, sehingga cocok untuk eksperimen awal dengan data terbatas dan tenggat pendek.
-4. Volume saat ini masih kecil. Biaya dan latency API baru menjadi masalah pada skala besar.
+1. **Dataset yang tersedia belum layak untuk melatih model klasik secara optimal.** Hanya ada 40 kalimat unik, 32 di antaranya untuk training. Model klasik memperoleh accuracy 0,70 dengan 12 kesalahan, sedangkan LLM memperoleh 1,00 tanpa kesalahan pada 40 kalimat yang sama.
+2. **Model klasik lemah pada negasi.** Padahal keluhan pelanggan sering berbentuk negasi seperti "tidak berfungsi", "tidak sesuai", dan "belum sampai". LLM menangani negasi tanpa proses training.
+3. **Effort implementasi LLM jauh lebih rendah.** Tidak ada training, preprocessing, atau tuning, sehingga cocok untuk eksperimen awal dengan data terbatas dan tenggat pendek.
+4. **Volume saat ini masih kecil.** Biaya dan latency API baru menjadi masalah pada skala besar.
 
 ### 8.2 Mengapa bukan model klasik sekarang
 
@@ -423,10 +420,9 @@ copy .env.example .env
 Lalu isi `.env`:
 
 ```env
-GEMINI_API_KEY=isi_api_key_di_sini
+GEMINI_API_KEY=xxxxxxxx
 ```
 
-File `.env` sudah masuk `.gitignore` dan tidak akan ter-commit.
 
 ### 9.4 Menjalankan notebook
 
@@ -448,7 +444,7 @@ Opsi 2, lewat VS Code:
 Opsi 3, lewat terminal:
 
 ```powershell
-python -m nbconvert --to notebook --execute notebook/experiment_notebook.ipynb --output experiment_notebook.ipynb --output-dir notebook --ExecutePreprocessor.timeout=600
+python -m nbconvert --to notebook --execute notebook/experiment_notebook.ipynb --output experiment_notebook.ipynb --ExecutePreprocessor.timeout=600
 ```
 
 ### 9.5 Urutan eksekusi
@@ -470,7 +466,6 @@ Jalankan dari atas ke bawah:
 13. Tabel perbandingan test set.
 14. Tabel perbandingan 40 kalimat dan contoh kesalahan.
 
-Cell inference LLM membutuhkan 40 panggilan API. Waktu eksekusinya sekitar 1 sampai 5 menit tergantung latency dan kuota.
 
 ### 9.6 Output yang dihasilkan
 
@@ -480,55 +475,6 @@ Setelah Run All:
 - `documentation/comparison_table.csv` dibuat atau diperbarui.
 - Notebook menyimpan hasil evaluasi pada variabel dan output cell.
 
-### 9.7 Jika API error
 
-| Error | Penyebab | Solusi |
-|---|---|---|
-| `404 NOT_FOUND` | Model sudah tidak tersedia untuk pengguna baru | Ganti `MODEL` ke model yang tersedia |
-| `429 RESOURCE_EXHAUSTED` | Kuota atau rate limit habis | Tunggu reset, ganti key, atau ganti model |
-| `403 PERMISSION_DENIED` | API key tidak valid atau API belum aktif | Cek key dan aktifkan Gemini API |
-| `NameError: client` | Cell 5.1 belum dijalankan | Jalankan cell setup API |
-| `NameError: classify_sentiment_llm` | Cell 5.2 belum dijalankan | Jalankan cell prompt |
-| Output LLM kosong | Token output habis untuk thinking | Matikan thinking atau naikkan `max_output_tokens` |
 
-Daftar model yang tersedia untuk key tertentu dapat dicek dengan:
 
-```python
-for model in client.models.list():
-    print(model.name)
-```
-
----
-
-## 10. Reproducibility
-
-| Komponen | Nilai |
-|---|---|
-| Random state split | 42 |
-| Test size | 0.2 |
-| Cross-validation | 5-fold Stratified |
-| Model klasik | TF-IDF + Logistic Regression, `max_iter=1000` |
-| Model LLM | `gemini-3.1-flash-lite` |
-| Temperature | 0.0 |
-| Max output token | 32 |
-| Teknik prompting | Zero-shot |
-| Normalisasi output | Lowercase dan mapping label |
-
-Hasil LLM dapat berbeda sedikit antar run karena sifat model generatif, meskipun temperature 0.0. Simpan nama model dan tanggal eksperimen saat melaporkan hasil.
-
----
-
-## 11. Checklist Output Assignment
-
-- [x] Experiment notebook berisi kedua pendekatan.
-- [x] Dataset asli tersedia di `data/`.
-- [x] Evaluation results: accuracy, precision, recall, F1, dan confusion matrix.
-- [x] Model comparison table.
-- [x] Analisis trade-off dan limitation.
-- [x] Technical recommendation.
-- [x] `requirements.txt`.
-- [x] `README.md`.
-- [x] Artefak dokumentasi di folder `documentation/`.
-- [x] Nama peserta sudah diisi.
-- [x] Repository GitHub sudah memakai format `assignment-model-experiment-Haikal_Satrio`.
-- [x] Repository bersifat public dan dapat diakses mentor.
