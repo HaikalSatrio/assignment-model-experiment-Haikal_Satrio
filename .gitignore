@@ -6,7 +6,7 @@ __pycache__/
 venv/
 .venv/
 
-# Secrets: JANGAN pernah commit file ini
+# File rahasia: .env tidak boleh di-commit
 .env
 
 # Output eksperimen yang dihasilkan ulang (boleh di-commit kalau ingin dijadikan bukti)

@@ -128,10 +128,10 @@ assignment-model-experiment-Haikal_Satrio/
 
 Pipeline:
 
-1. Teks diubah menjadi fitur numerik memakai **TF-IDF**.
-2. Model **Logistic Regression** dilatih pada 32 kalimat training.
+1. Teks diubah menjadi fitur numerik memakai TF-IDF.
+2. Model Logistic Regression dilatih pada 32 kalimat training.
 3. Prediksi dilakukan pada 8 kalimat test.
-4. Validasi tambahan memakai **5-fold Stratified Cross-Validation** pada seluruh 40 kalimat unik.
+4. Validasi tambahan memakai 5-fold Stratified Cross-Validation pada seluruh 40 kalimat unik.
 
 TF-IDF bekerja dengan memberi bobot pada setiap kata:
 
@@ -288,7 +288,7 @@ Pada 40 kalimat:
 - Model klasik: accuracy 0,70 dan F1 macro 0,70.
 - Gemini 3.1 Flash Lite: accuracy 1,00 dan F1 macro 1,00.
 
-**Gemini 3.1 Flash Lite unggul pada eksperimen ini.** Namun kesimpulan ini harus dibaca dalam konteks dataset yang kecil dan relatif mudah. LLM mendapat 1,00 pada 40 kalimat, sementara model klasik hanya dilatih dengan 32 kalimat dan kosakata 131 kata.
+Gemini 3.1 Flash Lite unggul pada eksperimen ini. Namun kesimpulan ini harus dibaca dalam konteks dataset yang kecil dan relatif mudah. LLM mendapat 1,00 pada 40 kalimat, sementara model klasik hanya dilatih dengan 32 kalimat dan kosakata 131 kata.
 
 ### 7.2 Trade-off effort implementasi
 
@@ -347,14 +347,14 @@ Pada 40 ulasan, perbedaan latency tidak terasa. Pada 1 juta ulasan, model klasik
 
 ## 8. Rekomendasi Technical Approach
 
-**Rekomendasi:** untuk fase awal, gunakan **Gemini 3.1 Flash Lite dengan prompt zero-shot**. Setelah data berlabel terkumpul cukup banyak, migrasikan ke model klasik dan gunakan LLM sebagai pelabel otomatis atau weak supervision.
+Untuk fase awal, rekomendasinya adalah Gemini 3.1 Flash Lite dengan prompt zero-shot. Setelah data berlabel terkumpul cukup banyak, pendekatan dapat dimigrasikan ke model klasik, dengan LLM berperan sebagai pelabel otomatis atau weak supervision.
 
 ### 8.1 Alasan berbasis hasil eksperimen
 
-1. **Dataset yang tersedia belum layak untuk melatih model klasik secara optimal.** Hanya ada 40 kalimat unik, 32 di antaranya untuk training. Model klasik memperoleh accuracy 0,70 dengan 12 kesalahan, sedangkan LLM memperoleh 1,00 tanpa kesalahan pada 40 kalimat yang sama.
-2. **Model klasik lemah pada negasi.** Padahal keluhan pelanggan sering berbentuk negasi seperti "tidak berfungsi", "tidak sesuai", dan "belum sampai". LLM menangani negasi tanpa proses training.
-3. **Effort implementasi LLM jauh lebih rendah.** Tidak ada training, preprocessing, atau tuning, sehingga cocok untuk eksperimen awal dengan data terbatas dan tenggat pendek.
-4. **Volume saat ini masih kecil.** Biaya dan latency API baru menjadi masalah pada skala besar.
+1. Dataset yang tersedia belum layak untuk melatih model klasik secara optimal. Hanya ada 40 kalimat unik, 32 di antaranya untuk training. Model klasik memperoleh accuracy 0,70 dengan 12 kesalahan, sedangkan LLM memperoleh 1,00 tanpa kesalahan pada 40 kalimat yang sama.
+2. Model klasik lemah pada negasi. Padahal keluhan pelanggan sering berbentuk negasi seperti "tidak berfungsi", "tidak sesuai", dan "belum sampai". LLM menangani negasi tanpa proses training.
+3. Effort implementasi LLM jauh lebih rendah. Tidak ada training, preprocessing, atau tuning, sehingga cocok untuk eksperimen awal dengan data terbatas dan tenggat pendek.
+4. Volume saat ini masih kecil. Biaya dan latency API baru menjadi masalah pada skala besar.
 
 ### 8.2 Mengapa bukan model klasik sekarang
 
@@ -423,7 +423,7 @@ copy .env.example .env
 Lalu isi `.env`:
 
 ```env
-GEMINI_API_KEY=isi_api_key_kamu_di_sini
+GEMINI_API_KEY=isi_api_key_di_sini
 ```
 
 File `.env` sudah masuk `.gitignore` dan tidak akan ter-commit.
@@ -448,7 +448,7 @@ Opsi 2, lewat VS Code:
 Opsi 3, lewat terminal:
 
 ```powershell
-python -m nbconvert --to notebook --execute notebook/experiment_notebook.ipynb --output experiment_notebook.ipynb --ExecutePreprocessor.timeout=600
+python -m nbconvert --to notebook --execute notebook/experiment_notebook.ipynb --output experiment_notebook.ipynb --output-dir notebook --ExecutePreprocessor.timeout=600
 ```
 
 ### 9.5 Urutan eksekusi
